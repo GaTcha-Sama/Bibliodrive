@@ -1,0 +1,19 @@
+<!-- authors/detail.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de l'Auteur</title>
+</head>
+<body>
+    <h1>{{ author.name }}</h1>
+    <p><strong>Biographie :</strong> {{ author.biography }}</p>
+    <p><strong>Livres :</strong></p>
+    <ul>
+        {% for title in author.titles.all %}
+            <li>{{ title.title }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'author_list' %}">Retour à la liste des auteurs</a>
+</body>
+</html>

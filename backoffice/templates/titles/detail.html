@@ -1,0 +1,15 @@
+<!-- books/detail.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du Livre</title>
+</head>
+<body>
+    <h1>{{ title.title }}</h1>
+    <p><strong>Auteur :</strong> {{ title.author }}</p>
+    <p><strong>ISBN :</strong> {{ title.isbn }}</p>
+    <p><strong>Résumé :</strong> {{ title.description }}</p>
+    <a href="{% url 'title_list' %}">Retour à la liste des livres</a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!-- authors/list.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Auteurs</title>
+</head>
+<body>
+    <h1>Liste des Auteurs</h1>
+    <ul>
+        {% for author in authors %}
+            <li>
+                <a href="{% url 'author_detail' author.au_id %}">{{ author.author }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'home' %}">Retour à la page d'accueil</a></p>
+</body>
+</html>

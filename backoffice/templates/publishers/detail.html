@@ -1,0 +1,19 @@
+<!-- publishers/detail.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails de l'Éditeur</title>
+</head>
+<body>
+    <h1>{{ publisher.name }}</h1>
+    <p><strong>Adresse :</strong> {{ publisher.address }}</p>
+    <p><strong>Livres publiés :</strong></p>
+    <ul>
+        {% for title in publisher.titles.all %}
+            <li>{{ title.title }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'publisher_list' %}">Retour à la liste des éditeurs</a>
+</body>
+</html>

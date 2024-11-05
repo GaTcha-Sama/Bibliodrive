@@ -1,0 +1,187 @@
+[
+      {
+        "model": "backoffice.publisher",
+        "pk": 1,
+        "fields": {
+          "name": "Penguin Books",
+          "company_name": "Penguin Random House",
+          "address": "1745 Broadway",
+          "city": "New York",
+          "state": "NY",
+          "zip": "10019",
+          "telephone": "212-366-2000",
+          "fax": "212-366-2666",
+          "comments": "One of the largest English-language publishers."
+        }
+      },
+      {
+        "model": "backoffice.publisher",
+        "pk": 2,
+        "fields": {
+          "name": "HarperCollins",
+          "company_name": "HarperCollins Publishers LLC",
+          "address": "195 Broadway",
+          "city": "New York",
+          "state": "NY",
+          "zip": "10007",
+          "telephone": "212-207-7000",
+          "fax": "212-207-7001",
+          "comments": "A subsidiary of News Corp, publishing various genres."
+        }
+      },
+      {
+        "model": "backoffice.publisher",
+        "pk": 3,
+        "fields": {
+          "name": "Macmillan",
+          "company_name": "Macmillan Publishers",
+          "address": "120 Broadway",
+          "city": "New York",
+          "state": "NY",
+          "zip": "10271",
+          "telephone": "646-307-5151",
+          "fax": "646-307-5151",
+          "comments": "A global trade publishing company operating in over 70 countries."
+        }
+      },
+      {
+        "model": "backoffice.publisher",
+        "pk": 4,
+        "fields": {
+          "name": "Simon & Schuster",
+          "company_name": "Simon & Schuster, Inc.",
+          "address": "1230 Avenue of the Americas",
+          "city": "New York",
+          "state": "NY",
+          "zip": "10020",
+          "telephone": "212-698-7000",
+          "fax": "212-698-7001",
+          "comments": "A subsidiary of Paramount Global, publishing a wide range of titles."
+        }
+      },
+      {
+        "model": "backoffice.publisher",
+        "pk": 5,
+        "fields": {
+          "name": "Hachette",
+          "company_name": "Hachette Book Group",
+          "address": "1290 Avenue of the Americas",
+          "city": "New York",
+          "state": "NY",
+          "zip": "10104",
+          "telephone": "212-364-1100",
+          "fax": "212-364-0649",
+          "comments": "A leading US trade publisher, a division of Hachette Livre."
+        }
+      },
+      {
+        "model": "backoffice.author",
+        "pk": 1,
+        "fields": {
+          "author": "J.K. Rowling",
+          "year_born": 1965
+        }
+      },
+      {
+        "model": "backoffice.author",
+        "pk": 2,
+        "fields": {
+          "author": "Stephen King",
+          "year_born": 1947
+        }
+      },
+      {
+        "model": "backoffice.author",
+        "pk": 3,
+        "fields": {
+          "author": "George R.R. Martin",
+          "year_born": 1948
+        }
+      },
+      {
+        "model": "backoffice.author",
+        "pk": 4,
+        "fields": {
+          "author": "Agatha Christie",
+          "year_born": 1890
+        }
+      },
+      {
+        "model": "backoffice.author",
+        "pk": 5,
+        "fields": {
+          "author": "Haruki Murakami",
+          "year_born": 1949
+        }
+      },
+      {
+        "model": "backoffice.title",
+        "pk": "978-0747532743",
+        "fields": {
+          "title": "Harry Potter and the Philosopher's Stone",
+          "year_published": 1997,
+          "pubid": 1,
+          "description": "The first book in the Harry Potter series",
+          "notes": "Bestseller, adapted into a movie",
+          "subject": "Fantasy",
+          "comments": "Launched a global phenomenon",
+          "authors": [1]
+        }
+      },
+      {
+        "model": "backoffice.title",
+        "pk": "978-1501142970",
+        "fields": {
+          "title": "It",
+          "year_published": 1986,
+          "pubid": 2,
+          "description": "A horror novel about a shape-shifting entity",
+          "notes": "One of King's most popular works",
+          "subject": "Horror",
+          "comments": "Adapted into movies and a TV series",
+          "authors": [2]
+        }
+      },
+      {
+        "model": "backoffice.title",
+        "pk": "978-0553103540",
+        "fields": {
+          "title": "A Game of Thrones",
+          "year_published": 1996,
+          "pubid": 3,
+          "description": "The first book in A Song of Ice and Fire series",
+          "notes": "Adapted into a successful TV series",
+          "subject": "Fantasy",
+          "comments": "Complex political intrigue in a fantasy setting",
+          "authors": [3]
+        }
+      },
+      {
+        "model": "backoffice.title",
+        "pk": "978-0062073488",
+        "fields": {
+          "title": "Murder on the Orient Express",
+          "year_published": 1934,
+          "pubid": 4,
+          "description": "A Hercule Poirot mystery novel",
+          "notes": "One of Christie's most famous works",
+          "subject": "Mystery",
+          "comments": "Adapted into multiple films",
+          "authors": [4]
+        }
+      },
+      {
+        "model": "backoffice.title",
+        "pk": "978-0307476463",
+        "fields": {
+          "title": "Norwegian Wood",
+          "year_published": 1987,
+          "pubid": 5,
+          "description": "A nostalgic story of loss and sexuality",
+          "notes": "Murakami's breakthrough novel",
+          "subject": "Literary Fiction",
+          "comments": "Sold millions of copies in Japan",
+          "authors": [5]
+        }
+      }
+    ]

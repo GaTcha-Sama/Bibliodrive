@@ -1,0 +1,19 @@
+<!-- books/list.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Livres</title>
+</head>
+<body>
+    <h1>Liste des Livres</h1>
+    <ul>
+        {% for title in titles %}
+            <li>
+                <a href="{% url 'title_detail' title.isbn %}">{{ title.title }}</a> par {{ title.authors }}
+            </li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'home' %}">Retour à la page d'accueil</a></p>
+</body>
+</html>

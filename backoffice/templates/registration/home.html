@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>BIBLIODRIVE - Accueil</title>
+</head>
+<body>
+    <h1>BIBLIODRIVE</h1>
+    <h3>Bienvenue sur ce site de réservation de livres en ligne</h3>
+
+    <ul>
+        <li><a href="{% url 'title_list' %}">Liste des livres</a></li>
+        <li><a href="{% url 'author_list' %}">Liste des auteurs</a></li>
+        <li><a href="{% url 'publisher_list' %}">Liste des éditeurs</a></li>
+        <li><a href="{% url 'login' %}">Connexion utilisateur</a></li>
+    </ul>
+</body>
+</html>

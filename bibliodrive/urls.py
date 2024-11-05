@@ -1,0 +1,39 @@
+"""
+URL configuration for bibliodrive project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/5.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from backoffice import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+
+    path('titles/', views.title_list, name='title_list'),
+    path('title/<str:isbn>/', views.title_detail, name='title_detail'),
+
+    path('authors/', views.author_list, name='author_list'),
+    path('author/<int:au_id>/', views.author_detail, name='author_detail'),
+    
+    path('publishers/', views.publishers_list, name='publisher_list'),
+    path('publisher/<int:pubid>', views.publisher_detail, name='publisher_detail'),
+
+    path('login/', views.login_view, name='login'),
+
+    path('test/', views.test, name="test"),
+    path('hello/', views.hello,name='hello'),
+    path('hello/<nom>', views.hello,name='hello'),
+]
