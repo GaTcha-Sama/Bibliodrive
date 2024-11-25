@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            Accueil
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static '/css/main.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'home' %}">BIBLIODRIVE</a></h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Accueil</a></li>
+            <li><a href="{% url 'title_list' %}">Liste des livres</a></li>
+            <li><a href="{% url 'author_list' %}">Liste des auteurs</a></li>
+            <li><a href="{% url 'publisher_list' %}">Liste des éditeurs</a></li>
+            <li><a href="{% url 'login' %}">Connexion utilisateur</a></li>
+            <li><a href="{% url 'signup' %}">S'inscrire</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 BIBLIODRIVE. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

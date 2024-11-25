@@ -1,4 +1,4 @@
-<!-- books/list.html -->
+<!-- titles/list.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +10,11 @@
     <ul>
         {% for title in titles %}
             <li>
-                <a href="{% url 'title_detail' title.isbn %}">{{ title.title }}</a> par {{ title.authors }}
+                <a href="{% url 'title_detail' title.isbn %}">{{ title.title }}</a> 
+                par 
+                {% for author in title.authors.all %}
+                    {{ author.author }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
             </li>
         {% endfor %}
     </ul>

@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'backoffice'
+    'backoffice',
+    'tailwind',
+]
+
+TAILWIND_APP_NAME = 'theme'
+
+# NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
 ]
 
 MIDDLEWARE = [
@@ -116,6 +126,10 @@ DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y-%m-%d')
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+# AJOUT PERSO POUR CONFIG TAILWIND
+STATICFILES_DIRS = [os.path.join(BASE_DIR /"backoffice"/"static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

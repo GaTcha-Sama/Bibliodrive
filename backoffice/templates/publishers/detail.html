@@ -8,6 +8,11 @@
 <body>
     <h1>{{ publisher.name }}</h1>
     <p><strong>Adresse :</strong> {{ publisher.address }}</p>
+    <p><strong>Code Postal :</strong> {{ publisher.zip }}</p>
+    <p><strong>Ville :</strong> {{ publisher.city }}</p>
+    <p><strong>Pays :</strong> {{ publisher.state }}</p>
+    <p><strong>Téléphone :</strong> {{ publisher.telephone }}</p>
+    <p><strong>Fax :</strong> {{ publisher.fax }}</p>
     <p><strong>Livres publiés :</strong></p>
     <ul>
         {% for title in publisher.titles.all %}
@@ -15,5 +20,6 @@
         {% endfor %}
     </ul>
     <a href="{% url 'publisher_list' %}">Retour à la liste des éditeurs</a>
+    <a href="{% url 'home' %}">Retour à la page d'accueil</a>
 </body>
 </html>

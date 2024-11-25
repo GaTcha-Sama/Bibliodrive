@@ -1,4 +1,4 @@
-<!-- books/detail.html -->
+<!-- titles/detail.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,9 +7,17 @@
 </head>
 <body>
     <h1>{{ title.title }}</h1>
-    <p><strong>Auteur :</strong> {{ title.author }}</p>
+    <p><strong>Auteur(s) :</strong> 
+        {% for author in title.authors.all %}
+            <a href="{% url 'author_detail' author.au_id %}">{{ author.author }}</a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </p>
     <p><strong>ISBN :</strong> {{ title.isbn }}</p>
+    <p><strong>Date de publication :</strong> {{ title.year_published }}</p>
+    <p><strong>Notes :</strong> {{ title.notes }}</p>
+    <p><strong>Sujet :</strong> {{ title.subject }}</p>
     <p><strong>Résumé :</strong> {{ title.description }}</p>
     <a href="{% url 'title_list' %}">Retour à la liste des livres</a>
+    <a href="{% url 'home' %}">Retour à la page d'accueil</a>
 </body>
 </html>

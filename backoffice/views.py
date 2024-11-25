@@ -1,11 +1,52 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from .models import Title, Author, Publisher  
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.http import HttpResponseRedirect
+from .forms import LoginForm, SignUpForm
+
+# Vue pour la connexion
+def login_view(request):
+    form=LoginForm()
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request, username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'You have successfully logged in.')
+                return redirect('home')  
+            else:
+                messages.error(request, 'Invalid username or password.')
+           
+    return render(request, './registration/login.html', {"form":form})
+
+# Vue pour l'inscription
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            form = SignUpForm()
+
+# Vue pour la déconnexion
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+# Vue pour la base.html
+def base(request):
+    return render(request, 'base.html')
 
 # Vue pour la page d'accueil
 def home(request):
-    return render(request, 'registration/home.html')
+    return render(request, 'home.html')
 
 # # Vue pour afficher la liste des livres
 def title_list(request):
@@ -36,28 +77,5 @@ def publishers_list(request):
 def publisher_detail(request, pubid):
     publisher = get_object_or_404(Publisher, pk=pubid)
     return render(request, 'publishers/detail.html', {'publisher': publisher})
-
-# Vue pour la connexion
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect('/')  # Redirige vers la page d'accueil après connexion
-        else:
-            return HttpResponse("Échec de la connexion. Vérifiez vos identifiants.")
-    return render(request, 'login.html')  # Affiche le formulaire de connexion
-
-# Vue de test existante
-def test(request): 
-    html = "<html><body>TRY</body></html>"
-    return HttpResponse(html)
-
-# Vue hello existante, avec un paramètre optionnel 'nom'
-def hello(request, nom="Test"):
-    html = f"<html><body>Hello {nom}</body></html>"
-    return HttpResponse(html)
 
 

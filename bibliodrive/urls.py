@@ -20,7 +20,8 @@ from backoffice import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    path('home/', views.home, name='home'),
+    path('', views.base, name='base'),
 
     path('titles/', views.title_list, name='title_list'),
     path('title/<str:isbn>/', views.title_detail, name='title_detail'),
@@ -32,8 +33,5 @@ urlpatterns = [
     path('publisher/<int:pubid>', views.publisher_detail, name='publisher_detail'),
 
     path('login/', views.login_view, name='login'),
-
-    path('test/', views.test, name="test"),
-    path('hello/', views.hello,name='hello'),
-    path('hello/<nom>', views.hello,name='hello'),
+    path('signup/', views.signup_view, name='signup')
 ]

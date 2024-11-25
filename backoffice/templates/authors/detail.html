@@ -6,14 +6,14 @@
     <title>Détails de l'Auteur</title>
 </head>
 <body>
-    <h1>{{ author.name }}</h1>
-    <p><strong>Biographie :</strong> {{ author.biography }}</p>
-    <p><strong>Livres :</strong></p>
+    <h1>{{ author.author }}</h1>
+    <p><strong>Naissance :</strong> {{ author.year_born }}</p>
     <ul>
         {% for title in author.titles.all %}
             <li>{{ title.title }}</li>
         {% endfor %}
     </ul>
     <a href="{% url 'author_list' %}">Retour à la liste des auteurs</a>
+    <a href="{% url 'home' %}">Retour à la page d'accueil</a>
 </body>
 </html>
