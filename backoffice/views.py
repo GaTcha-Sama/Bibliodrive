@@ -32,10 +32,12 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
-        else:
-            form = SignUpForm()
-        return render(request, './registration/signup.html', {'form': form})
+            return redirect('home')  
+    else:
+        form = SignUpForm() 
+
+    return render(request, './registration/signup.html', {'form': form})
+
 
 # Vue pour la déconnexion
 def logout_view(request):
