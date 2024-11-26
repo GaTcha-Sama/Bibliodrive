@@ -128,6 +128,11 @@ DATE_INPUT_FORMATS = ('%d/%m/%Y','%Y-%m-%d')
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+# Media files
+
+MEDIA_URL = '/cover_image/'
+MEDIA_ROOT = BASE_DIR / 'cover_image'
+
 # AJOUT PERSO POUR CONFIG TAILWIND
 STATICFILES_DIRS = [os.path.join(BASE_DIR /"backoffice"/"static")]
 

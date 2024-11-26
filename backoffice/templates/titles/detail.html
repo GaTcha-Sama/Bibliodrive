@@ -67,6 +67,7 @@
 </head>
 <body>
     <h1>{{ title.title }}</h1>
+    <img src = "/{{ title.cover_image }}">
     <p><strong>Auteur(s) :</strong> 
         {% for author in title.authors.all %}
             <a href="{% url 'author_detail' author.au_id %}">{{ author.author }}</a>{% if not forloop.last %}, {% endif %}

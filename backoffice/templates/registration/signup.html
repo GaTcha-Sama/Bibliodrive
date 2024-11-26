@@ -1,19 +1,7 @@
 <!-- signup.html -->
-<form method="post" class="my-4">
+<h1>Créer un compte</h1>
+<form method="post">
     {% csrf_token %}
-    {% for field in form %}
-      <div class="form-group">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
-      </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Sign Up</button>
+    {{ form.as_p }}
+    <button type="submit">S'inscrire</button>
 </form>
- 
-  {% if messages %}
-    {% for message in messages %}
-      <div class="alert alert-info" role="alert">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}

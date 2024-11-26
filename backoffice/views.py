@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .forms import LoginForm, SignUpForm
+from django.core.paginator import Paginator
 
 # Vue pour la connexion
 def login_view(request):
@@ -34,6 +35,7 @@ def signup_view(request):
             return redirect('home')
         else:
             form = SignUpForm()
+        return render(request, './registration/signup.html', {'form': form})
 
 # Vue pour la déconnexion
 def logout_view(request):
@@ -78,4 +80,11 @@ def publisher_detail(request, pubid):
     publisher = get_object_or_404(Publisher, pk=pubid)
     return render(request, 'publishers/detail.html', {'publisher': publisher})
 
+# Vue pour la pagination
+def pagination(request):
+    posts = Title.objects.order_by('-year_published')
+    paginator = Paginator(posts, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
+    return render(request, 'pagination.html', {'page_obj': page_obj})

@@ -5,7 +5,7 @@ import os
 def cover_image_upload_to(instance, filename):
     ext = filename.split('.')[-1]
     filename = f"{instance.isbn}_{uuid4().hex[:8]}.{ext}"
-    return os.path.join('cover_images', filename)
+    return os.path.join('cover_image', filename)
  
 # Table "AUTHORS"
 class Author(models.Model):
