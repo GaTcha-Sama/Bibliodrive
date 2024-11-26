@@ -21,10 +21,15 @@
             <li><a href="{% url 'title_list' %}">Liste des livres</a></li>
             <li><a href="{% url 'author_list' %}">Liste des auteurs</a></li>
             <li><a href="{% url 'publisher_list' %}">Liste des éditeurs</a></li>
-            <li><a href="{% url 'login' %}">Connexion utilisateur</a></li>
-            <li><a href="{% url 'signup' %}">S'inscrire</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Déconnexion</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Connexion</a></li>
+                <li><a href="{% url 'signup' %}">S'inscrire</a></li>
+            {% endif %}
         </ul>
     </nav>
+    
 
     <main>
         {% block content %}{% endblock %}

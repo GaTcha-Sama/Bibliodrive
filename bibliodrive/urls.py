@@ -35,5 +35,6 @@ urlpatterns = [
     path('publisher/<int:pubid>', views.publisher_detail, name='publisher_detail'),
 
     path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
     path('signup/', views.signup_view, name='signup')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

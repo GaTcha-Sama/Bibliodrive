@@ -68,9 +68,12 @@
     <p><strong>Naissance :</strong> {{ author.year_born }}</p>
     <h2>Livres de l'auteur :</h2>
     <ul>
-        {% for title in author.titles.all %}
-            <li>{{ title.title }}</li>
+        {% for title in author.title_set.all %}
+            <li>
+                <a href="{% url 'title_detail' title.isbn %}">{{ title.title }}</a>
+            </li>
         {% endfor %}
+
     </ul>
     <a href="{% url 'author_list' %}">Retour à la liste des auteurs</a>
     <a href="{% url 'home' %}">Retour à la page d'accueil</a>

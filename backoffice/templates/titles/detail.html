@@ -20,6 +20,18 @@
             padding-bottom: 10px;
         }
 
+        img {
+            max-width: 200px;
+            max-height: 300px; 
+            margin: 20px 0; 
+            display: block; 
+            margin-left: auto;
+            margin-right: auto; 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+            object-fit: cover; 
+        }
+
         p {
             margin: 15px 0;
             background-color: #fff;
@@ -67,7 +79,7 @@
 </head>
 <body>
     <h1>{{ title.title }}</h1>
-    <img src = "/{{ title.cover_image }}">
+    <img src="/{{ title.cover_image }}" alt="Couverture du livre">
     <p><strong>Auteur(s) :</strong> 
         {% for author in title.authors.all %}
             <a href="{% url 'author_detail' author.au_id %}">{{ author.author }}</a>{% if not forloop.last %}, {% endif %}
@@ -84,3 +96,4 @@
     </div>
 </body>
 </html>
+

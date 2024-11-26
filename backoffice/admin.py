@@ -12,6 +12,6 @@ class TitleAdmin(admin.ModelAdmin):
         if obj.image:
             return format_html('<img src="{}" style="width: 50px; height:auto;">', obj.image.url)
         return "Aucune image"
-    cover_image.short_description = "Apreçu de l'image"
+    cover_image.short_description = "Aperçu de l'image"
 
 admin.site.register(Title, TitleAdmin)

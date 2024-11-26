@@ -1,15 +1,96 @@
 <!-- login.html -->
-<form method="post" class="my-4">
-    {% csrf_token %}
-    {% for field in form %}
-      <div class="form-group">
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
-      </div>
-    {% endfor %}
-    <button type="submit" class="btn btn-primary">Log In</button>
-</form>
- 
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f1ea; /* Beige doux */
+    color: #5a4635; /* Brun foncé */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Hauteur pleine page */
+  }
+
+  .form-container {
+    background-color: #fffaf3; /* Fond clair */
+    padding: 20px 30px;
+    border: 1px solid #d2b48c; /* Marron clair */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+    width: 100%;
+    max-width: 400px; /* Limite la largeur */
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group label {
+    font-weight: bold;
+    color: #5a4635;
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #d2b48c; /* Brun clair */
+    border-radius: 4px;
+    background-color: #fffaf3; /* Beige clair */
+    color: #5a4635;
+  }
+
+  .form-group input:focus {
+    border-color: #a0522d; /* Marron foncé */
+    outline: none;
+    background-color: #f9f5ec;
+  }
+
+  .btn-primary {
+    background-color: #8b5e3c; /* Marron bois */
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fffaf3; /* Texte beige clair */
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%; /* Remplit la largeur du conteneur */
+  }
+
+  .btn-primary:hover {
+    background-color: #a0522d; /* Marron foncé */
+  }
+
+  .alert {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #d2b48c;
+    border-radius: 4px;
+    background-color: #f9f5ec;
+    color: #5a4635;
+  }
+
+  .alert-info {
+    background-color: #fffaf3;
+    border-color: #d2b48c; /* Marron clair */
+  }
+</style>
+
+<div class="form-container">
+  <form method="post" class="my-4">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.errors }}
+          {{ field.label_tag }} {{ field }}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary">Log In</button>
+  </form>
+
   {% if messages %}
     {% for message in messages %}
       <div class="alert alert-info" role="alert">
@@ -17,4 +98,6 @@
       </div>
     {% endfor %}
   {% endif %}
+</div>
+
 
