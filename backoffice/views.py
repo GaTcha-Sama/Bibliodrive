@@ -84,7 +84,7 @@ def publisher_detail(request, pubid):
 
 # Vue pour la pagination
 def pagination(request):
-    posts = Title.objects.order_by('-year_published')
+    posts = Title.objects.order_by('year_published')
     paginator = Paginator(posts, 5)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
