@@ -76,16 +76,20 @@ def publisher_detail(request, pubid):
     publisher = get_object_or_404(Publisher, pk=pubid)
     return render(request, 'publishers/detail.html', {'publisher': publisher})
 
-# # Vue pour afficher la liste des livres
+# Vue pour afficher la liste des livres
 def title_list(request):
-    query = request.GET.get('q', '')
+    query = request.GET.get('q', '') 
     if query:
-        titles = Title.objects.filter(title__icontains=query)
+        titles = Title.objects.filter(title__icontains=query) # Filtrage des livres dans la liste
     else:
         titles = Title.objects.all()
 
-    titles = titles.order_by('year_published') 
-    paginator = Paginator(titles, 3) 
+    titles = titles.order_by('year_published') # Agencement des livres par ancienneté de publication
+    paginator = Paginator(titles, 6) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'titles/list.html', {'titles': page_obj, 'query': query})
+
+
+
+

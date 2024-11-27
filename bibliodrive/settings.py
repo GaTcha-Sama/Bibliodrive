@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backoffice',
+    'django_filters',
+    'debug_toolbar',
     'tailwind',
 ]
 
@@ -58,7 +60,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+INTERNAL_IPS = ("127.0.0.1", "172.17.0.1")
 
 ROOT_URLCONF = 'bibliodrive.urls'
 
