@@ -64,6 +64,12 @@
 </head>
 <body>
     <h1>Liste des Livres</h1>
+    <div>
+        <form method="get" action="{% url 'title_list' %}">
+            <input type="text" name="q" value="{{ query}}" placeholder="Rechercher par titre">
+            <button type="submit">Appliquer les filtres</button>
+        </form>
+    </div>
     <ul>
         {% for title in titles %}
             <li>
@@ -74,6 +80,7 @@
                     {% for author in title.authors.all %}
                         {{ author.author }}{% if not forloop.last %}, {% endif %}
                     {% endfor %}
+                    <p>Publié en {{ title.year_published }}</p>
                 </div>
             </li>
         {% endfor %}

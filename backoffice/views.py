@@ -38,7 +38,6 @@ def signup_view(request):
 
     return render(request, './registration/signup.html', {'form': form})
 
-
 # Vue pour la déconnexion
 def logout_view(request):
     logout(request)
@@ -51,8 +50,6 @@ def base(request):
 # Vue pour la page d'accueil
 def home(request):
     return render(request, 'home.html')
-
-
 
 # Vue pour afficher la liste des auteurs
 def author_list(request):
@@ -81,8 +78,14 @@ def publisher_detail(request, pubid):
 
 # # Vue pour afficher la liste des livres
 def title_list(request):
-    titles = Title.objects.all()  # Récupère tous les livres
+    query = request.GET.get('q', '')
+    if query:
+        titles = Title.objects.filter(title__icontains=query)
+    else:
+        titles = Title.objects.all()
+
+    titles = titles.order_by('year_published') 
     paginator = Paginator(titles, 3) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'titles/list.html', {'titles': page_obj})
+    return render(request, 'titles/list.html', {'titles': page_obj, 'query': query})
