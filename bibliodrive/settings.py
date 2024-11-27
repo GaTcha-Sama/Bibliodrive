@@ -130,8 +130,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Media files
 
-MEDIA_URL = '/cover_image/'
-MEDIA_ROOT = BASE_DIR / 'cover_image'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # AJOUT PERSO POUR CONFIG TAILWIND
 STATICFILES_DIRS = [os.path.join(BASE_DIR /"backoffice"/"static")]

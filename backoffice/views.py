@@ -52,10 +52,7 @@ def base(request):
 def home(request):
     return render(request, 'home.html')
 
-# # Vue pour afficher la liste des livres
-def title_list(request):
-    titles = Title.objects.all()  # Récupère tous les livres
-    return render(request, 'titles/list.html', {'titles': titles})
+
 
 # Vue pour afficher la liste des auteurs
 def author_list(request):
@@ -82,11 +79,10 @@ def publisher_detail(request, pubid):
     publisher = get_object_or_404(Publisher, pk=pubid)
     return render(request, 'publishers/detail.html', {'publisher': publisher})
 
-# Vue pour la pagination
-def pagination(request):
-    posts = Title.objects.order_by('year_published')
-    paginator = Paginator(posts, 5)
+# # Vue pour afficher la liste des livres
+def title_list(request):
+    titles = Title.objects.all()  # Récupère tous les livres
+    paginator = Paginator(titles, 3) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-    return render(request, 'pagination.html', {'page_obj': page_obj})
+    return render(request, 'titles/list.html', {'titles': page_obj})

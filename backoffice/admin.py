@@ -7,6 +7,7 @@ admin.site.register(Publisher)
 
 class TitleAdmin(admin.ModelAdmin):
     list_display = ('title', 'cover_image')
+    search_fields = ['title', 'authors']
 
     def cover_image(self, obj):
         if obj.image:

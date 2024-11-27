@@ -67,7 +67,7 @@
     <ul>
         {% for title in titles %}
             <li>
-                <img src="/{{ title.cover_image }}" alt="Couverture du livre">
+                <img src="{{ title.cover_image.url }}" alt="Couverture du livre">
                 <div>
                     <a href="{% url 'title_detail' title.isbn %}">{{ title.title }}</a> 
                     par 
@@ -77,6 +77,19 @@
                 </div>
             </li>
         {% endfor %}
+    </ul>
+    <ul>
+        {% if titles.has_previous %}
+            <li><a href="?page=1">Première</a></li>
+            <li><a href="?page={{ titles.previous_page_number }}">Précédente</a></li>
+        {% endif %}
+        
+        <li><span>Page {{ titles.number }} de {{ titles.paginator.num_pages }}</span></li>
+        
+        {% if titles.has_next %}
+            <li><a href="?page={{ titles.next_page_number }}">Suivante</a></li>
+            <li><a href="?page={{ titles.paginator.num_pages }}">Dernière</a></li>
+        {% endif %}
     </ul>
     <p><a href="{% url 'home' %}">Retour à la page d'accueil</a></p>
 </body>
