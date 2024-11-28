@@ -28,6 +28,8 @@ urlpatterns = [
 
     path('titles/', views.title_list, name='title_list'),
     path('title/<str:isbn>/', views.title_detail, name='title_detail'),
+    path('reserve/<str:isbn>/', views.reserve_title, name='reserve_title'),
+    path('cancel-reserve/<str:isbn>/', views.cancel_reserve, name='cancel_reserve'),
 
     path('authors/', views.author_list, name='author_list'),
     path('author/<int:au_id>/', views.author_detail, name='author_detail'),

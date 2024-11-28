@@ -1,10 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
-from .models import Title, Author, Publisher  
+from .models import Title, Author, Publisher, Reservation
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from .forms import LoginForm, SignUpForm
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+from django.db import IntegrityError
 
 # Vue pour la connexion
 def login_view(request):
@@ -64,7 +66,13 @@ def author_detail(request, au_id):
 # # Vue pour afficher les détails d'un livre par ISBN
 def title_detail(request, isbn):
     title = get_object_or_404(Title, isbn=isbn)
-    return render(request, 'titles/detail.html', {'title': title})
+    user_reservation = None
+    print('test')
+    if request.user.is_authenticated:
+        user_reservation = Reservation.objects.filter(user=request.user, title=title, is_active=True).first()
+        print(user_reservation)
+        
+    return render(request, 'titles/detail.html', {'title': title, 'user_reservation': user_reservation})
 
 # Vue pour afficher la liste des éditeurs
 def publishers_list(request):
@@ -90,6 +98,34 @@ def title_list(request):
     page_obj = paginator.get_page(page_number)
     return render(request, 'titles/list.html', {'titles': page_obj, 'query': query})
 
+# Vue pour la reservation
+@login_required
+def reserve_title(request, isbn):
+    title = get_object_or_404(Title, isbn=isbn)
+    user = request.user
 
+    if Reservation.objects.filter(user=user, is_active=True).count() >= 3:
+        messages.error(request, "Vous ne pouvez pas réserver plus de livres à la fois.")
+        return redirect('title_detail', isbn=isbn)
+    
+    try:
+        Reservation.objects.create(user=user, title=title)
+        messages.success(request, "Livre réservé avec succès.")
+    except IntegrityError:
+        messages.error(request, "Ce livre est déjà réservé.")
+
+    return redirect('title_detail', isbn=isbn)
+
+# Vue pour annuler la reservation
+@login_required
+def cancel_reserve(request, isbn):
+    title = get_object_or_404(Title, isbn=isbn)
+    reservation = get_object_or_404(Reservation, user=request.user, title=title, is_active=True)
+
+    reservation.is_active = False
+    reservation.save()
+
+    messages.success(request, "Votre réservation a été annulée avec succès.")
+    # return redirect('title_detail', isbn=isbn)
 
 

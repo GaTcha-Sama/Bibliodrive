@@ -1,6 +1,7 @@
 from django.db import models
 from uuid import uuid4
 import os
+from django.contrib.auth.models import User
 
 def cover_image_upload_to(instance, filename):
     ext = filename.split('.')[-1]
@@ -47,4 +48,18 @@ class Title(models.Model):
 
     def __str__(self):
         return self.title
+    
+# Table pour la "RESERVATION"
+
+class Reservation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.ForeignKey(Title, on_delete=models.CASCADE)
+    reservation_date = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = ('title', 'is_active')
+
+    def __str__(self):
+        return f"{self.user.username} - {self.title.title}"
  

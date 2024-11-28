@@ -75,6 +75,55 @@
             color: #fff;
             text-decoration: none;
         }
+
+        /* Réservation */
+
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .message-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #8b4513;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #a0522d;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
     </style>
 </head>
 <body>
@@ -90,6 +139,26 @@
     <p><strong>Notes :</strong> {{ title.notes }}</p>
     <p><strong>Sujet :</strong> {{ title.subject }}</p>
     <p><strong>Résumé :</strong> {{ title.description }}</p>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {% if message.tags %}message-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        {% if user_reservation.is_active %}
+            {% if title.reservation_set.filter.user.id == user.id %}
+                <p class="message message-success">Vous avez réservé ce livre.</p>
+                <a href="{% url 'cancel_reserve' title.isbn %}" class="btn btn-warning">Annuler la réservation</a>
+            {% else %}
+                <p class="message message-error">Ce livre est déjà réservé.</p>
+            {% endif %}
+        {% else %}
+            <a href="{% url 'reserve_title' title.isbn %}" class="btn btn-primary">Réserver</a>
+        {% endif %}
+    {% endif %}
     <div class="navigation">
         <a href="{% url 'title_list' %}">Retour à la liste des livres</a>
         <a href="{% url 'home' %}">Retour à la page d'accueil</a>
