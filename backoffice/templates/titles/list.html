@@ -60,11 +60,93 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        /* Filter Form Styles */
+
+        .filter-form {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            gap: 10px; 
+        }
+
+        .filter-form input[type="text"] {
+            padding: 8px 12px;
+            border: 1px solid #8b5a2b; 
+            border-radius: 3px;
+            font-size: 16px;
+            color: #3b2a20; 
+            background-color: #ffffff; 
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .filter-form input[type="text"]:focus {
+            border-color: #8b5a2b; 
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+            outline: none;
+        }
+
+        .filter-form button {
+            padding: 8px 15px;
+            font-size: 16px;
+            color: #ffffff; 
+            background-color: #8b5a2b; 
+            border: none;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .filter-form button:hover {
+            background-color: #a0522d; 
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+        }
+
+        /* Pagination Styles */
+
+        .pagination {
+            text-align: center; 
+            margin-top: 30px;
+        }
+
+        .pagination ul {
+            display: inline-flex; 
+            list-style: none; 
+            padding: 0;
+            gap: 10px; 
+        }
+
+        .pagination li {
+            background-color: #f5f5f0; 
+            padding: 8px 15px; 
+            border-radius: 3px;
+            border: 1px solid #8b5a2b;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a {
+            text-decoration: none;
+            color: #8b4513; 
+        }
+
+        .pagination a:hover {
+            color: #ffffff;
+            background-color: #8b5a2b; 
+        }
+
+        .pagination li span {
+            color: #8b5a2b;
+            font-weight: bold; 
+        }
     </style>
 </head>
 <body>
     <h1>Liste des Livres</h1>
-    <div>
+    <div class="filter-form">
         <form method="get" action="{% url 'title_list' %}">
             <input type="text" name="q" value="{{ query}}" placeholder="Rechercher par titre">
             <button type="submit">Appliquer les filtres</button>
@@ -85,19 +167,21 @@
             </li>
         {% endfor %}
     </ul>
-    <ul>
-        {% if titles.has_previous %}
-            <li><a href="?page=1">Première</a></li>
-            <li><a href="?page={{ titles.previous_page_number }}">Précédente</a></li>
-        {% endif %}
-        
-        <li><span>Page {{ titles.number }} de {{ titles.paginator.num_pages }}</span></li>
-        
-        {% if titles.has_next %}
-            <li><a href="?page={{ titles.next_page_number }}">Suivante</a></li>
-            <li><a href="?page={{ titles.paginator.num_pages }}">Dernière</a></li>
-        {% endif %}
-    </ul>
+    <nav class="pagination">
+        <ul>
+            {% if titles.has_previous %}
+                <li><a href="?page=1">Première</a></li>
+                <li><a href="?page={{ titles.previous_page_number }}">Précédente</a></li>
+            {% endif %}
+            
+            <li><span>Page {{ titles.number }} de {{ titles.paginator.num_pages }}</span></li>
+            
+            {% if titles.has_next %}
+                <li><a href="?page={{ titles.next_page_number }}">Suivante</a></li>
+                <li><a href="?page={{ titles.paginator.num_pages }}">Dernière</a></li>
+            {% endif %}
+        </ul>
+    </nav>    
     <p><a href="{% url 'home' %}">Retour à la page d'accueil</a></p>
 </body>
 </html>
