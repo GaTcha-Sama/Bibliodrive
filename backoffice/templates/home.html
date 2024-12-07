@@ -1,8 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}BIBLIODRIVE - Accueil{% endblock %}
 
 {% block content %}
-    <h3>Bienvenue sur ce site de réservation de livres en ligne</h3>
+    <style>
+        .centered-message {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-size: 1.5em;
+            color: #333;
+            margin-top: 20px;
+        }
+        .centered-image {
+            display: block;
+            margin: 20px auto;
+            max-width: 50%;
+            height: 50%%;
+        }
+    </style>
+    <h3 class="centered-message">Bienvenue sur ce site de réservation de livres en ligne</h3>
+    <img src="{% static 'images/imagehome.png' %}" alt="Image de bienvenue" class="centered-image">
 {% endblock %}
-

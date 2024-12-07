@@ -105,7 +105,7 @@ def reserve_title(request, isbn):
     user = request.user
 
     if Reservation.objects.filter(user=user, is_active=True).count() >= 3:
-        messages.error(request, "Vous ne pouvez pas réserver plus de livres à la fois.")
+        messages.error(request, "Vous ne pouvez pas réserver plus de 3 livres à la fois.")
         return redirect('title_detail', isbn=isbn)
     
     try:
