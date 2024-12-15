@@ -66,13 +66,9 @@ def author_detail(request, au_id):
 # # Vue pour afficher les détails d'un livre par ISBN
 def title_detail(request, isbn):
     title = get_object_or_404(Title, isbn=isbn)
-    user_reservation = None
-    print('test')
-    if request.user.is_authenticated:
-        user_reservation = Reservation.objects.filter(user=request.user, title=title, is_active=True).first()
-        print(user_reservation)
-        
-    return render(request, 'titles/detail.html', {'title': title, 'user_reservation': user_reservation})
+    is_reserved = title.reservation_set.filter(is_active=True).exists()
+    return render(request, 'titles/detail.html', {'title': title, 'is_reserved': is_reserved})
+
 
 # Vue pour afficher la liste des éditeurs
 def publishers_list(request):
@@ -88,11 +84,11 @@ def publisher_detail(request, pubid):
 def title_list(request):
     query = request.GET.get('q', '') 
     if query:
-        titles = Title.objects.filter(title__icontains=query) # Filtrage des livres dans la liste
+        titles = Title.objects.filter(title__icontains=query) 
     else:
         titles = Title.objects.all()
 
-    titles = titles.order_by('year_published') # Agencement des livres par ancienneté de publication
+    titles = titles.order_by('year_published') 
     paginator = Paginator(titles, 6) 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -115,17 +111,5 @@ def reserve_title(request, isbn):
         messages.error(request, "Ce livre est déjà réservé.")
 
     return redirect('title_detail', isbn=isbn)
-
-# Vue pour annuler la reservation
-@login_required
-def cancel_reserve(request, isbn):
-    title = get_object_or_404(Title, isbn=isbn)
-    reservation = get_object_or_404(Reservation, user=request.user, title=title, is_active=True)
-
-    reservation.is_active = False
-    reservation.save()
-
-    messages.success(request, "Votre réservation a été annulée avec succès.")
-    # return redirect('title_detail', isbn=isbn)
 
 

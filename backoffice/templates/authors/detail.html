@@ -12,6 +12,15 @@
             line-height: 1.6;
             margin: 0;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
         }
 
         h1 {
@@ -44,11 +53,25 @@
             border-radius: 5px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border-left: 3px solid #8b5a2b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .book-cover {
+            width: 100px;
+            height: 150px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .book-info {
+            text-align: left;
         }
 
         a {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 10px;
             padding: 8px 15px;
             background-color: #d2b48c;
             color: #3b2a20;
@@ -64,18 +87,30 @@
     </style>
 </head>
 <body>
-    <h1>{{ author.author }}</h1>
-    <p><strong>Naissance :</strong> {{ author.year_born }}</p>
-    <h2>Livres de l'auteur :</h2>
-    <ul>
-        {% for title in author.title_set.all %}
-            <li>
-                <a href="{% url 'title_detail' title.isbn %}">{{ title.title }}</a>
-            </li>
-        {% endfor %}
-
-    </ul>
-    <a href="{% url 'author_list' %}">Retour à la liste des auteurs</a>
-    <a href="{% url 'home' %}">Retour à la page d'accueil</a>
+    <div class="container">
+        <h1>{{ author.author }}</h1>
+        <p><strong>Naissance :</strong> {{ author.year_born }}</p>
+        <h2>Livres de l'auteur :</h2>
+        <ul>
+            {% for title in author.title_set.all %}
+                <li>
+                    {% if title.cover_image %}
+                        <img src="{{ title.cover_image.url }}" alt="Couverture de {{ title.title }}" class="book-cover">
+                    {% else %}
+                        <div class="book-cover" style="background-color: #d2b48c;">Pas d'image</div>
+                    {% endif %}
+                    <div class="book-info">
+                        <h3>{{ title.title }}</h3>
+                        <p>Année de publication : {{ title.year_published }}</p>
+                        <a href="{% url 'title_detail' title.isbn %}">Voir les détails</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <div>
+            <a href="{% url 'author_list' %}">Retour à la liste des auteurs</a>
+            <a href="{% url 'home' %}">Retour à la page d'accueil</a>
+        </div>
+    </div>
 </body>
 </html>

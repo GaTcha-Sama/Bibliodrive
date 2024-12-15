@@ -148,16 +148,11 @@
     {% endif %}
 
     {% if user.is_authenticated %}
-        {% if user_reservation.is_active %}
-            {% if title.reservation_set.filter.user.id == user.id %}
-                <p class="message message-success">Vous avez réservé ce livre.</p>
-                <a href="{% url 'cancel_reserve' title.isbn %}" class="btn btn-warning">Annuler la réservation</a>
-            {% else %}
-                <p class="message message-error">Ce livre est déjà réservé.</p>
-            {% endif %}
-        {% else %}
-            <a href="{% url 'reserve_title' title.isbn %}" class="btn btn-primary">Réserver</a>
-        {% endif %}
+    {% if is_reserved %}
+    <p class="message message-error">Ce livre est déjà réservé.</p>
+    {% else %}
+    <a href="{% url 'reserve_title' title.isbn %}" class="btn btn-primary">Réserver</a>
+    {% endif %}
     {% endif %}
     <div class="navigation">
         <a href="{% url 'title_list' %}">Retour à la liste des livres</a>
