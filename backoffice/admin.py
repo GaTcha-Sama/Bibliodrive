@@ -9,11 +9,11 @@ admin.site.register(Publisher)
 
 class TitleAdmin(admin.ModelAdmin):
     list_display = ('title', 'cover_image')
-    search_fields = ['title', 'authors__name']  # Assuming authors have a 'name' field
+    search_fields = ['title', 'authors__author'] 
 
     def cover_image(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="width: 50px; height:auto;">', obj.image.url)
+        if obj.cover_image:
+            return format_html('<img src="{}" style="max-width: 50px; height:auto;">', obj.cover_image.url)
         return "Aucune image"
     cover_image.short_description = "Aperçu de l'image"
 
