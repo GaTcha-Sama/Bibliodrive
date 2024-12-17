@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils import timezone
+from django.contrib import messages
 from backoffice.models import Author, Publisher, Title
 from .models import Reservation
 
@@ -34,7 +35,21 @@ class ReservationAdmin(admin.ModelAdmin):
     duration.short_description = "Durée (jours)"
 
     def archive_reservations(self, request, queryset):
-        queryset.update(is_active=False, end_date=timezone.now())
+        if not request.user.has_perm('reservation.can_archive_reservations'):
+            messages.error(request, "Vous n'avez pas la permission d'archiver les réservations.")
+            return
+
+        updated = queryset.update(is_active=False, end_date=timezone.now())
+        
+        if updated == 1:
+            message = "1 réservation a été archivée."
+        else:
+            message = f"{updated} réservations ont été archivées."
+        
+        self.message_user(request, message, messages.SUCCESS)
+        
+        admin.ModelAdmin.log_change(self, request, None, message)
+
     archive_reservations.short_description = "Archiver les réservations sélectionnées"
 
 admin.site.register(Reservation, ReservationAdmin)
