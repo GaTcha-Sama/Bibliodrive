@@ -13,6 +13,12 @@
             padding: 20px;
         }
 
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
         h1 {
             text-align: center;
             color: #8b5a2b;
@@ -24,6 +30,7 @@
         ul {
             list-style-type: none;
             padding: 0;
+            width: 100%;
         }
 
         li {
@@ -33,6 +40,7 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-left: 5px solid #8b5a2b;
+            text-align: center;
         }
 
         a {
@@ -51,14 +59,16 @@
     </style>
 </head>
 <body>
-    <h1>Liste des Auteurs</h1>
-    <ul>
-        {% for author in authors %}
-            <li>
-                <a href="{% url 'author_detail' author.au_id %}">{{ author.author }}</a>
-            </li>
-        {% endfor %}
-    </ul>
-    <p><a href="{% url 'home' %}">Retour à la page d'accueil</a></p>
+    <div class="container">
+        <h1>Liste des Auteurs</h1>
+        <ul>
+            {% for author in authors %}
+                <li>
+                    <a href="{% url 'author_detail' author.au_id %}">{{ author.author }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <p><a href="{% url 'home' %}">Retour à la page d'accueil</a></p>
+    </div>
 </body>
 </html>
